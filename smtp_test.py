@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
+
 import smtplib
 from email.message import EmailMessage
 
 from dotenv import dotenv_values
 
-html_content = '<img src="https://drive.google.com/uc?export=download&id=19Z6q1yZZENE_tcmJgYpY4fPv-VZoS_cR" style="width: 500px; display: inline; outline: none !important; text-decoration: none !important; -ms-interpolation-mode: bicubic; clear: both; border: 0;" align="none" />'
+html_content = '<img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Ours_brun_parcanimalierpyrenees_1.jpg" style="width: 500px; display: inline; outline: none !important; text-decoration: none !important; -ms-interpolation-mode: bicubic; clear: both; border: 0;" align="none" />'
+
 
 def test_smtp(smtp_server, smtp_port, smtp_username, smtp_password, sender_email, receiver_email):
     try:
@@ -20,7 +23,6 @@ def test_smtp(smtp_server, smtp_port, smtp_username, smtp_password, sender_email
         message["To"] = receiver_email
         # message.set_content("This is a test email.")
         message.add_alternative(html_content, subtype="html")
-
 
         # Send the email
         server.send_message(message)
@@ -46,4 +48,5 @@ if __name__ == "__main__":
     receiver_email = config.get("RECEIVER_EMAIL")
 
     # Call the function to test SMTP details
-    test_smtp(smtp_server, smtp_port, smtp_username, smtp_password, sender_email, receiver_email)
+    test_smtp(smtp_server, smtp_port, smtp_username,
+              smtp_password, sender_email, receiver_email)
